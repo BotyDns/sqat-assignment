@@ -14,12 +14,16 @@ public class PageBase {
     private WebDriver driver;
     private WebDriverWait wait;
 
-    private final By bodyLocator = By.tagName("body");
-    private final By usernameLocator = By.id("username");
-    private final By passwordLocator = By.id("password");
-    private final By loginButtonLocator = By.xpath("//form[@id='login']/button");
-    private final By logoutButtonLocator = By.linkText("Logout");
-    private final By errorLocator = By.id("flash");
+    public PageBase(WebDriver driver) {
+        this.driver = driver;
+        this.wait = new WebDriverWait(driver, 10);
+    }
+    
+    protected WebElement waitAndReturnElement(By locator) {
+        this.wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        return this.driver.findElement(locator);
+    } 
+
 
     @Before
     public void setup() throws MalformedURLException {
