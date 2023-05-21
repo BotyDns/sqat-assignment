@@ -15,20 +15,16 @@ import java.util.*;
 import java.net.URL;
 import java.net.MalformedURLException;
 
-public class ClickupTestBase {
-    public WebDriver driver;
-    
-    @Before
-    public void setup()  throws MalformedURLException  {
-        ChromeOptions options = new ChromeOptions();
-        driver = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
-        driver.manage().window().maximize();
-    }
 
-    @After
-    public void close() {
-        if (driver != null) {
-            driver.quit();
-        }
+public class ClickupLoginTest extends ClickupTestBase {
+    
+    @Test
+    public void testSearch() {
+        
+    }
+    
+    @Test
+    public void testSearch2() {
+
     }
 }
