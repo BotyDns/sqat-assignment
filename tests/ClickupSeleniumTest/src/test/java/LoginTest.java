@@ -16,7 +16,7 @@ import java.net.URL;
 import java.net.MalformedURLException;
 
 
-public class ClickupLoginTest extends ClickupTestBase {
+public class LoginTest extends ClickupTestBase {
     
     @Test
     public void testSearch() {

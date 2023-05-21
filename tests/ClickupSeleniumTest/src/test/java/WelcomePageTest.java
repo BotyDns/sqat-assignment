@@ -1,3 +1,4 @@
+import org.junit.*;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -8,7 +9,6 @@ import java.util.*;
 
 import java.net.URL;
 import java.net.MalformedURLException;
-
 
 public class WelcomePageTest extends ClickupTestBase {
     
@@ -23,13 +23,12 @@ public class WelcomePageTest extends ClickupTestBase {
 
     @Test
     public void testWelcomePageLoads() {
-        WelcomePage welcomePage = new WelcomePage(this.driver);
-        Assert.assertTrue(welcomePage.waitAndCheckPageLoad());
+        Assert.assertTrue(this.welcomePage.waitAndCheckPageLoad());
     }
     
     @Test
     public void testPressLoginButtonAndGoToLoginPage() {
-        WelcomePage welcomePage = new WelcomePage(this.d)
+
     }
 
     @After

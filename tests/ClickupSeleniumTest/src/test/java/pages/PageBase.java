@@ -11,8 +11,8 @@ import java.net.MalformedURLException;
 
 public abstract class PageBase {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
     public PageBase(WebDriver driver) {
         this.driver = driver;

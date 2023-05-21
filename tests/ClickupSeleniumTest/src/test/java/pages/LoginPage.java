@@ -19,13 +19,17 @@ public class LoginPage extends PageBase {
         super(driver);
     }
 
-    public DashboardPage login(String email, String password)
-    {
+    public DashboardPage login(String email, String password) {
         this.waitAndReturnElement(this.emailInputBy).sendKeys(email);
         this.waitAndReturnElement(this.passwordInputBy).sendKeys(password);
         this.waitAndReturnElement(this.submitButtonBy).click();
 
         return new DashboardPage(this.driver);
+    }
+
+    @Override
+    public boolean waitAndCheckPageLoad() {
+        return false;
     }
 
 }
