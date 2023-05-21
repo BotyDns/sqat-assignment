@@ -11,12 +11,16 @@ import java.net.MalformedURLException;
 
 
 public class DashboardPage extends PageBase {
+    private By dashboardTextBy = By.tagName("title");
+
     public DashboardPage(WebDriver driver) {
         super(driver);
     }
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        return false;
+        String text = this.waitAndReturnElement(this.dashboardTextBy).getText();
+        System.out.println(text);     
+        return text.contains("Workspace");
     }
 }

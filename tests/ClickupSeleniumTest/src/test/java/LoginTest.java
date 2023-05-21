@@ -18,13 +18,26 @@ import java.net.MalformedURLException;
 
 public class LoginTest extends ClickupTestBase {
     
+    private LoginPage loginPage;
+
+    @Before
+    @Override
+    public void setup() throws MalformedURLException {
+        super.setup();
+        this.loginPage = LoginPage.connect(this.driver);
+    }
+
     @Test
-    public void testSearch() {
-        
+    public void testLogin() {
+        DashboardPage dashboardPage = this.loginPage.login("", "");
+        Assert.assertTrue(dashboardPage.waitAndCheckPageLoad());
     }
     
-    @Test
-    public void testSearch2() {
 
+    @After
+    @Override
+    public void close() {
+        this.loginPage = null;
+        super.close();
     }
 }

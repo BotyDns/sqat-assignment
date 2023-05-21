@@ -14,9 +14,15 @@ public class LoginPage extends PageBase {
     private By emailInputBy = By.id("login-email-input");
     private By passwordInputBy = By.id("login-password-input");
     private By submitButtonBy = By.xpath("//form[@data-form-type='login']/button[@class='login-page-new__main-form-button']");
+    private By dontHaveAnAccountTextBy = By.className("login-page-new__main-bot-text");
 
     public LoginPage(WebDriver driver) {
         super(driver);
+    }
+
+    public static LoginPage connect(WebDriver driver) {
+        driver.get("https://app.clickup.com/login");
+        return new LoginPage(driver);
     }
 
     public DashboardPage login(String email, String password) {
@@ -29,7 +35,8 @@ public class LoginPage extends PageBase {
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        return false;
+        String text = this.waitAndReturnElement(this.dontHaveAnAccountTextBy).getText();        
+        return text.contains("Don't have an account? Sign up");
     }
 
 }

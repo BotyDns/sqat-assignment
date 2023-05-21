@@ -13,22 +13,25 @@ import java.util.concurrent.TimeUnit;
 public class WelcomePage extends PageBase {
 
     private By loginButtonBy = By.xpath("//div[@class='CuNavigation_contactGroup__WpPNb navigation__auth']/a[@data-testid='cu-button']");
-    private By welcomeMessageBy = By.xpath("//div[@data-testid='cu-title']/h1[@data-mutiny-root='true']");
+    private By loginBannerBy = By.xpath("//div[@data-testid='cu-title']");
 
     public WelcomePage(WebDriver driver) {
         super(driver);
-        this.driver.get("https://clickup.com/");
+    }
+
+    public static WelcomePage connect(WebDriver driver) {
+        driver.get("https://clickup.com/");
+        return new WelcomePage(driver);
     }
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        String welcomeText = this.waitAndReturnElement(this.welcomeMessageBy).getText();
- 
-        return welcomeText.contains("All teams. All work. One place.");
+        String welcomeText = this.waitAndReturnElement(this.loginBannerBy).getText();
+        return welcomeText.contains("One app to replace them all.");
     }
 
     public LoginPage pressLoginButtonAndGoToLoginPage() {
-        this.waitAndReturnElement(loginButtonBy).click();
+        this.waitAndReturnElement(this.loginButtonBy).click();
         return new LoginPage(this.driver);
     }
 

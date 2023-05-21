@@ -18,7 +18,7 @@ public class WelcomePageTest extends ClickupTestBase {
     @Override
     public void setup() throws MalformedURLException {
         super.setup();
-        this.welcomePage = new WelcomePage(this.driver);
+        this.welcomePage = WelcomePage.connect(this.driver);
     }
 
     @Test
@@ -28,7 +28,8 @@ public class WelcomePageTest extends ClickupTestBase {
     
     @Test
     public void testPressLoginButtonAndGoToLoginPage() {
-
+        LoginPage loginPage = this.welcomePage.pressLoginButtonAndGoToLoginPage();
+        Assert.assertTrue(loginPage.waitAndCheckPageLoad());
     }
 
     @After
