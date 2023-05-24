@@ -11,7 +11,7 @@ import java.net.MalformedURLException;
 
 
 public class DashboardPage extends PageBase {
-    private By dashboardTextBy = By.tagName("title");
+    private By calendarBy = By.xpath("//a[@data-test='data-view-item__view-id-body-Calendar']");
 
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -19,8 +19,7 @@ public class DashboardPage extends PageBase {
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        String text = this.waitAndReturnElement(this.dashboardTextBy).getText();
-        System.out.println(text);     
-        return text.contains("Workspace");
+        String text = this.waitAndReturnElement(this.calendarBy).getText();  
+        return text.contains("Calendar");
     }
 }
