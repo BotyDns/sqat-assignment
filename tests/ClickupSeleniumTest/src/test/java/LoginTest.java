@@ -21,15 +21,15 @@ public class LoginTest extends ClickupTestBase {
     
     private LoginPage loginPage;
 
-    private String username;
-    private String password;
+    private static String username;
+    private static String password;
     
-    private const String TEST_CONFIG_PATH_VAR = "TEST_PROPERTIES_PATH";
+    private final static String TEST_CONFIG_PATH_VAR = "TEST_PROPERTIES_PATH";
 
     @BeforeClass
     public static void setupClass() throws Exception {
         String configPath = System.getenv(TEST_CONFIG_PATH_VAR);
-        
+
         Properties props = new Properties();
         try (FileInputStream fs = new FileInputStream(configPath)) {
             
@@ -38,8 +38,8 @@ public class LoginTest extends ClickupTestBase {
             throw e;
         }
 
-        this.username = props.getProperty("username");
-        this.password = props.getProperty("password");
+        LoginTest.username = props.getProperty("username");
+        LoginTest.password = props.getProperty("password");
     }
 
     @Before
