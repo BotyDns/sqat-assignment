@@ -16,7 +16,7 @@ public class DashboardPage extends PageBase {
     private By sidebarButtonBy = By.xpath("//button[@data-test='collapsed-sidebar__toggle-icon-hover']");
     private By profileToggleButtonBy = By.xpath("//div[@data-test='user-settings-dropdown-toggle']");
     private By settingsButtonBy = By.xpath("//a[@data-test='user-settings-menu-item-my-settings']");
-
+    private By logoutButtonBy = By.xpath("//a[@data-test='user-settings-menu-item-log-out']");
 
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -40,15 +40,22 @@ public class DashboardPage extends PageBase {
         actions.moveToElement(sidebarButton);
     }
 
-    public SettingsPage openSettings() {
+    public void toggleProfile() {
         WebElement profileButton = this.waitAndReturnElement(this.profileToggleButtonBy);
         profileButton.click();
+    }
+
+    public SettingsPage openSettings() {
+        toggleProfile();
         WebElement settingsButton = this.waitAndReturnElement(this.settingsButtonBy);
         settingsButton.click();
         return new SettingsPage(this.driver);
     }
 
-    // public SettingsPage visitSettings() {
-        
-    // }
+    public LoginPage logout() {
+        toggleProfile();
+        WebElement logoutButton = this.waitAndReturnElement(this.logoutButtonBy);
+        logoutButton.click();
+        return new LoginPage(this.driver);
+    }
 }

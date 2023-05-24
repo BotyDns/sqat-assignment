@@ -2,6 +2,7 @@ import org.junit.*;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -21,8 +22,14 @@ public class ClickupTestBase {
     
     protected static String username;
     protected static String password;
+    protected static Cookie idToken;
+    protected static Cookie refreshToken;
     
     protected final static String TEST_CONFIG_PATH_VAR = "TEST_PROPERTIES_PATH";
+
+    protected final static String idTokenKey = "id_token";
+    protected final static String refreshTokenKey = "refresh_token";
+    protected final static String domain = "app.clickup.com";
 
     public static WebDriver createWebDriver() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
@@ -63,5 +70,35 @@ public class ClickupTestBase {
 
         LoginTest.username = props.getProperty("username");
         LoginTest.password = props.getProperty("password");
+    }
+
+    protected static void setupCookies() throws Exception {
+        LoginPage loginPage = LoginPage.connect(ClickupTestBase.createWebDriver());
+        DashboardPage dashboardPage = loginPage.login(ClickupTestBase.username, ClickupTestBase.password);
+        Assert.assertTrue(dashboardPage.waitAndCheckPageLoad());
+        dashboardPage.waitUntilFullyLoaded();
+
+        Map<String, String> cookies = ClickupTestBase.getLocalStorageCookies(dashboardPage.driver);
+
+        if (cookies == null)
+            throw new NullPointerException();
+
+        ClickupTestBase.idToken = new Cookie(ClickupTestBase.idTokenKey, cookies.get(ClickupTestBase.idTokenKey), ClickupTestBase.domain, null, null, true, true);
+        ClickupTestBase.refreshToken = new Cookie(ClickupTestBase.refreshTokenKey, cookies.get(ClickupTestBase.refreshTokenKey), ClickupTestBase.domain, null, null, true, true);
+
+        dashboardPage.driver.quit();
+    }
+
+    protected void addCookies() {
+        JavascriptExecutor jsExecutor = (JavascriptExecutor) this.driver;
+        
+        jsExecutor
+            .executeScript(createAddCookieScript(DashboardTest.idToken.getName(), DashboardTest.idToken.getValue()));
+        jsExecutor
+            .executeScript(createAddCookieScript(DashboardTest.refreshToken.getName(), DashboardTest.refreshToken.getValue()));
+    }
+
+    private String createAddCookieScript(String key, String value) {
+        return String.format("window.localStorage.%s = \"%s\";", key, value);
     }
 }
