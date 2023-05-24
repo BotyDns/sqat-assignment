@@ -25,6 +25,11 @@ public abstract class PageBase {
         return this.driver.findElement(locator);
     }
 
+    public WebDriver navigateBack() {
+        this.driver.navigate().back();
+        return this.driver;
+    }
+
     public void waitUntilFullyLoaded() {
         wait.until(ExpectedConditions.jsReturnsValue("return document.readyState === 'complete'"));
     }
