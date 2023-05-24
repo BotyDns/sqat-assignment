@@ -26,8 +26,8 @@ public class WelcomePage extends PageBase {
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        String welcomeText = this.waitAndReturnElement(this.loginBannerBy).getText();
-        return welcomeText.contains("One app to replace them all.");
+        this.waitAndReturnElement(this.loginBannerBy);
+        return this.driver.getTitle().contains("One app to replace them all");
     }
 
     public LoginPage pressLoginButtonAndGoToLoginPage() {
