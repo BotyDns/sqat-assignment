@@ -21,25 +21,9 @@ public class LoginTest extends ClickupTestBase {
     
     private LoginPage loginPage;
 
-    private static String username;
-    private static String password;
-    
-    private final static String TEST_CONFIG_PATH_VAR = "TEST_PROPERTIES_PATH";
-
     @BeforeClass
     public static void setupClass() throws Exception {
-        String configPath = System.getenv(TEST_CONFIG_PATH_VAR);
-
-        Properties props = new Properties();
-        try (FileInputStream fs = new FileInputStream(configPath)) {
-            
-            props.load(fs);
-        } catch (Exception e) {
-            throw e;
-        }
-
-        LoginTest.username = props.getProperty("username");
-        LoginTest.password = props.getProperty("password");
+        ClickupTestBase.setupFromConfig();
     }
 
     @Before
@@ -55,7 +39,6 @@ public class LoginTest extends ClickupTestBase {
         Assert.assertTrue(dashboardPage.waitAndCheckPageLoad());
     }
     
-
     @After
     @Override
     public void close() {
