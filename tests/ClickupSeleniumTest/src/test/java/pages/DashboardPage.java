@@ -14,6 +14,9 @@ import java.net.MalformedURLException;
 public class DashboardPage extends PageBase {
     private By calendarBy = By.xpath("//a[@data-test='data-view-item__view-id-body-Calendar']");
     private By sidebarButtonBy = By.xpath("//button[@data-test='collapsed-sidebar__toggle-icon-hover']");
+    private By profileToggleButtonBy = By.xpath("//div[@data-test='user-settings-dropdown-toggle']");
+    private By settingsButtonBy = By.xpath("//a[@data-test='user-settings-menu-item-my-settings']");
+
 
     public DashboardPage(WebDriver driver) {
         super(driver);
@@ -35,6 +38,14 @@ public class DashboardPage extends PageBase {
 
         Actions actions = new Actions(this.driver);
         actions.moveToElement(sidebarButton);
+    }
+
+    public SettingsPage openSettings() {
+        WebElement profileButton = this.waitAndReturnElement(this.profileToggleButtonBy);
+        profileButton.click();
+        WebElement settingsButton = this.waitAndReturnElement(this.settingsButtonBy);
+        settingsButton.click();
+        return new SettingsPage(this.driver);
     }
 
     // public SettingsPage visitSettings() {

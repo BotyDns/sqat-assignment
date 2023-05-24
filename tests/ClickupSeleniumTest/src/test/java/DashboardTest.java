@@ -70,9 +70,11 @@ public class DashboardTest extends ClickupTestBase {
     }
 
     @Test
-    public void test() throws Exception {
+    public void testSettingsOpen() {
         DashboardPage dashboardPage = connectWithCookies();
-        Assert.assertTrue(dashboardPage.waitAndCheckPageLoad());
+        SettingsPage settingsPage =  dashboardPage.openSettings();
+
+        Assert.assertTrue(settingsPage.waitAndCheckPageLoad());
     }
     
     @After
