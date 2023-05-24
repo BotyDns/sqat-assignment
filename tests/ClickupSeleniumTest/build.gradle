@@ -16,4 +16,5 @@ dependencies {
 
 test {
     testLogging.showStandardStreams = true
+    environment "TEST_PROPERTIES_PATH", "/config.properties"
 }

@@ -14,11 +14,33 @@ import java.util.*;
 
 import java.net.URL;
 import java.net.MalformedURLException;
-
+import java.util.Properties;
+import java.io.FileInputStream;
 
 public class LoginTest extends ClickupTestBase {
     
     private LoginPage loginPage;
+
+    private String username;
+    private String password;
+    
+    private const String TEST_CONFIG_PATH_VAR = "TEST_PROPERTIES_PATH";
+
+    @BeforeClass
+    public static void setupClass() throws Exception {
+        String configPath = System.getenv(TEST_CONFIG_PATH_VAR);
+        
+        Properties props = new Properties();
+        try (FileInputStream fs = new FileInputStream(configPath)) {
+            
+            props.load(fs);
+        } catch (Exception e) {
+            throw e;
+        }
+
+        this.username = props.getProperty("username");
+        this.password = props.getProperty("password");
+    }
 
     @Before
     @Override
@@ -29,7 +51,7 @@ public class LoginTest extends ClickupTestBase {
 
     @Test
     public void testLogin() {
-        DashboardPage dashboardPage = this.loginPage.login("", "");
+        DashboardPage dashboardPage = this.loginPage.login(this.username, this.password);
         Assert.assertTrue(dashboardPage.waitAndCheckPageLoad());
     }
     
