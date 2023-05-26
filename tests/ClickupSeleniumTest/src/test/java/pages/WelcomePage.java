@@ -1,18 +1,11 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.*;
+package pages;
+
 import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.*;
-import org.openqa.selenium.support.ui.*;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import java.net.URL;
-import java.net.MalformedURLException;
-import java.util.concurrent.TimeUnit;
 
 public class WelcomePage extends PageBase {
 
-    private By loginButtonBy = By.xpath("//div[@class='CuNavigation_contactGroup__WpPNb navigation__auth']/a[@data-testid='cu-button']");
+    private By loginButtonBy = By
+            .xpath("//div[@class='CuNavigation_contactGroup__WpPNb navigation__auth']/a[@data-testid='cu-button']");
     private By loginBannerBy = By.xpath("//div[@data-testid='cu-title']");
 
     public WelcomePage(WebDriver driver) {

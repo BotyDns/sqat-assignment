@@ -1,17 +1,11 @@
 import org.junit.*;
-import org.openqa.selenium.support.ui.WebDriverWait;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.remote.RemoteWebDriver;
 
-import org.openqa.selenium.By;
-import org.openqa.selenium.NoSuchElementException;
-import java.util.*;  
-
-import java.net.URL;
 import java.net.MalformedURLException;
 
+import pages.*;
+
 public class WelcomePageTest extends ClickupTestBase {
-    
+
     private WelcomePage welcomePage;
 
     @Before
@@ -25,7 +19,7 @@ public class WelcomePageTest extends ClickupTestBase {
     public void testWelcomePageLoads() {
         Assert.assertTrue(this.welcomePage.waitAndCheckPageLoad());
     }
-    
+
     @Test
     public void testPressLoginButtonAndGoToLoginPage() {
         LoginPage loginPage = this.welcomePage.pressLoginButtonAndGoToLoginPage();
@@ -37,7 +31,7 @@ public class WelcomePageTest extends ClickupTestBase {
         LoginPage loginPage = this.welcomePage.pressLoginButtonAndGoToLoginPage();
         loginPage.waitUntilFullyLoaded();
         loginPage.navigateBack();
-        
+
         Assert.assertTrue(this.welcomePage.waitAndCheckPageLoad());
     }
 

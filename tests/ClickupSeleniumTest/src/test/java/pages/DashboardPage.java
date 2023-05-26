@@ -1,15 +1,7 @@
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import org.junit.*;
-import org.openqa.selenium.*;
-import org.openqa.selenium.chrome.*;
-import org.openqa.selenium.support.ui.*;
-import org.openqa.selenium.remote.RemoteWebDriver;
-import org.openqa.selenium.interactions.Actions;
-import java.net.URL;
-import java.net.MalformedURLException;
+package pages;
 
+import org.openqa.selenium.*;
+import org.openqa.selenium.interactions.Actions;
 
 public class DashboardPage extends PageBase {
     private By calendarBy = By.xpath("//a[@data-test='data-view-item__view-id-body-Calendar']");
@@ -22,14 +14,14 @@ public class DashboardPage extends PageBase {
         super(driver);
     }
 
-    public static DashboardPage connect (WebDriver driver) {
+    public static DashboardPage connect(WebDriver driver) {
         driver.get("https://app.clickup.com/");
         return new DashboardPage(driver);
     }
 
     @Override
     public boolean waitAndCheckPageLoad() {
-        String text = this.waitAndReturnElement(this.calendarBy).getText();  
+        String text = this.waitAndReturnElement(this.calendarBy).getText();
         return text.contains("Calendar");
     }
 
