@@ -34,6 +34,7 @@ public class ClickupTestBase {
         return wd;
     }
 
+    @SuppressWarnings("unchecked")
     public static Map<String, String> getLocalStorageCookies(WebDriver wd) {
         Object obj = ((JavascriptExecutor) wd).executeScript("return window.localStorage;");
 

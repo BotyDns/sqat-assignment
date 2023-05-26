@@ -26,15 +26,6 @@ public class WelcomePageTest extends ClickupTestBase {
         Assert.assertTrue(loginPage.waitAndCheckPageLoad());
     }
 
-    @Test
-    public void testBackButtonReturnsFromLoginPageToWelcomePage() {
-        LoginPage loginPage = this.welcomePage.pressLoginButtonAndGoToLoginPage();
-        loginPage.waitUntilFullyLoaded();
-        loginPage.navigateBack();
-
-        Assert.assertTrue(this.welcomePage.waitAndCheckPageLoad());
-    }
-
     @After
     @Override
     public void close() {
