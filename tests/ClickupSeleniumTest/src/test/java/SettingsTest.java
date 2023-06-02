@@ -1,5 +1,4 @@
 import org.junit.*;
-import org.openqa.selenium.WebElement;
 
 import java.net.MalformedURLException;
 
@@ -32,6 +31,15 @@ public class SettingsTest extends ClickupTestBase {
     public void testSelectingTimezoneRandomly() throws InterruptedException {
         String randomTimezone = settingsPage.selectTimezoneRandomly();
         Assert.assertTrue(settingsPage.timezonesMatch(randomTimezone));
+    }
+
+    @Test
+    public void testDarkModeIsCorrectlySet() throws InterruptedException {
+        boolean wasDarkmodeOn = settingsPage.isDarkModeOn();
+        settingsPage.toggleDarkMode();
+        settingsPage.sendForm();
+
+        Assert.assertNotEquals(wasDarkmodeOn, settingsPage.isDarkModeOn());
     }
 
     @After

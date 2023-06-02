@@ -1,5 +1,7 @@
 import org.junit.*;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.PageLoadStrategy;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.Cookie;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -29,6 +31,7 @@ public class ClickupTestBase {
 
     public static WebDriver createWebDriver() throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
+        options.setUnhandledPromptBehaviour(UnexpectedAlertBehaviour.ACCEPT_AND_NOTIFY);
         WebDriver wd = new RemoteWebDriver(new URL("http://selenium:4444/wd/hub"), options);
         wd.manage().window().maximize();
         return wd;
